@@ -1,0 +1,24 @@
+.b-header
+  .b-header-title Shorten App
+
+= form_for @shorten, url: shorten_index_path, html: {class: "b-content-form"} do |f|
+  .b-content-form-errors
+    =  flash[:notice]
+  .b-content-form-item
+    %label Enter url here
+    = f.text_field :url
+
+  .b-content-form-actions
+    = f.submit "Submit"
+
+
+.b-content-notice
+  = flash[:notice]
+
+.b-content
+  - @shortens.each do |shorten|
+    .b-content-item
+      url:
+      = link_to shorten.url, shorten_path(shorten.slug), target: '_blank'
+      visits:
+      = shorten.visits
